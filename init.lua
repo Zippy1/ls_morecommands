@@ -5,6 +5,7 @@ local countd_time=0
 local countd_timer=0
 local countd_timer_on=0
 
+--Checks an IP of a player
 minetest.register_chatcommand("ipcheck", {
 	params = "",
 	description = "Get ip of player",
@@ -15,6 +16,9 @@ minetest.register_chatcommand("ipcheck", {
 	end
 end})
 
+--Use this command to send a message in the chat without the real person being there
+--Aka, /pretend Zac Morning all.
+--Will say in the chat: "<Zac> Morning all."
 minetest.register_chatcommand("pretend", {
 	params = "",
 	description = "global chat",
@@ -23,6 +27,7 @@ minetest.register_chatcommand("pretend", {
 	minetest.chat_send_all(param)
 end})
 
+--Activates a timer (seconds) until shutdown, does not respond at first, but it will.
 minetest.register_chatcommand("countonseconds", {
 	params = "",
 	description = "Shutdown with a countdown - SECONDS",
@@ -34,6 +39,7 @@ minetest.register_chatcommand("countonseconds", {
 	countd_timer_on=1
 end})
 
+--Activates a timer (minutes) until shutdown, does not respond at first, but it will.
 minetest.register_chatcommand("countonminutes", {
 	params = "",
 	description = "Shutdown with a countdown - MINUTES",
@@ -79,6 +85,10 @@ if countd_timer<=-1 then
 	end
 
 end)
+
+--Gives moderator status to a player, and tells everyone about it.
+--Edit the "privs.privexample=true" to change priv settings
+--Note that you don't need to include all the privs in the server and say (for example) "privs.server=false"
 minetest.register_chatcommand("givemoderator", {
 	params = "",
 	description = "Default moderator",
@@ -95,7 +105,10 @@ minetest.register_chatcommand("givemoderator", {
 			privs.give=true
 			privs.basic_privs=true
 			minetest.set_player_privs(param,privs)
-			--player:get_inventory():add_item("main","default:pick_diamond")
+				--Adds a pickaxe of diamond to the server
+				--Delete if you feel that is not needed or
+				--it is a creative server.
+			player:get_inventory():add_item("main","default:pick_diamond")
 			minetest.chat_send_player(param, "You are now moderator.")
 			minetest.chat_send_player(name, param .. " is now a moderator! -Server")
 			return true
