@@ -105,10 +105,6 @@ minetest.register_chatcommand("givemoderator", {
 			privs.give=true
 			privs.basic_privs=true
 			minetest.set_player_privs(param,privs)
-				--Adds a pickaxe of diamond to the server
-				--Delete if you feel that is not needed or
-				--it is a creative server.
-			player:get_inventory():add_item("main","default:pick_diamond")
 			minetest.chat_send_player(param, "You are now moderator.")
 			minetest.chat_send_player(name, param .. " is now a moderator! -Server")
 			return true
